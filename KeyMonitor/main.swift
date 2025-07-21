@@ -37,7 +37,6 @@ class IOHIDKeyMonitor {
         
         IOHIDManagerSetDeviceMatchingMultiple(manager, deviceMatching as CFArray)
         
-        // コールバック関数を設定
         let inputCallback: IOHIDValueCallback = { context, result, sender, value in
             guard let context = context else { return }
             let monitor = Unmanaged<IOHIDKeyMonitor>.fromOpaque(context).takeUnretainedValue()
@@ -49,7 +48,6 @@ class IOHIDKeyMonitor {
         // RunLoopにスケジュール
         IOHIDManagerScheduleWithRunLoop(manager, CFRunLoopGetCurrent(), CFRunLoopMode.defaultMode.rawValue)
         
-        // オープン
         let openResult = IOHIDManagerOpen(manager, IOOptionBits(kIOHIDOptionsTypeNone))
         if openResult != kIOReturnSuccess {
             print("HIDマネージャーのオープンに失敗しました: \(openResult)")
@@ -113,7 +111,6 @@ class IOHIDKeyMonitor {
     }
 }
 
-// シグナルハンドリング
 var hidMonitor: IOHIDKeyMonitor?
 
 func signalHandler(_ signal: Int32) {
@@ -125,7 +122,6 @@ func signalHandler(_ signal: Int32) {
 signal(SIGINT, signalHandler)
 signal(SIGTERM, signalHandler)
 
-// メイン実行
 func main() {
     print("=== IOHID Key Monitor for Windows Keyboards ===")
     print("変換・無変換キーの検出を試みます\n")
