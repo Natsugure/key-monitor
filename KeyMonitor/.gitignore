@@ -1,0 +1,15 @@
+# execution file
+KeyMonitor
+
+# macOS
+.DS_Store
+
+# Xcode
+*.xcodeproj/
+*.xcworkspace/
+xcuserdata/
+build/
+
+# Swift Package Manager
+.build/
+Package.resolved
